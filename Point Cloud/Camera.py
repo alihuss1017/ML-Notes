@@ -70,6 +70,11 @@ class Camera:
     def rotate_point_cloud(self,rotate):    
         self.pcd = np.matmul(rotate,self.pcd.T).T
 
+    def update_point_cloud(self):
+        self.pcd_o3d = o3d.geometry.PointCloud()
+        self.pcd_o3d_colors = o3d.utility.Vector3dVector(self.colors/255)
+        self.pcd_o3d.points = o3d.utility.Vector3dVector(self.pcd)
+
     def visualize(self):
         o3d.visualization.draw_geometries([self.pcd_o3d])
 
